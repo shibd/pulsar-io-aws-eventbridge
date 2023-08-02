@@ -74,6 +74,8 @@ public class BatchEventWriterTest {
     private static EventBridgeConfig getEventBridgeConfig(long batchMaxSize, long batchMaxBytesSize,
                                                           long batchMaxTimeMs) {
         Map<String, Object> configMap = new HashMap<>();
+        configMap.put("accessKeyId", "test_access_key_id");
+        configMap.put("secretAccessKey", "test_secret_access_key");
         configMap.put("eventBusName", "testEventBusName");
         configMap.put("region", "test-region");
         configMap.put("eventBusResourceName", "test-arn");

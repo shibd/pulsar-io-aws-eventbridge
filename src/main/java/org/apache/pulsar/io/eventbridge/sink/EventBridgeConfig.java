@@ -53,48 +53,28 @@ public class EventBridgeConfig implements Serializable {
     protected static final long DEFAULT_MAX_BATCH_BYTES_SIZE = 256000;
     @Serial
     private static final long serialVersionUID = 1L;
-    @FieldDoc(
-            required = false,
-            defaultValue = "",
-            sensitive = true,
-            help = "The EventBridge access key ID.")
-    private String accessKeyId;
-
-    @FieldDoc(
-            required = false,
-            defaultValue = "",
-            sensitive = true,
-            help = "The EventBridge secret access key.")
-    private String secretAccessKey;
-
-    @FieldDoc(
-            required = false,
-            defaultValue = "",
-            help = "The aws role to use.")
-    private String role;
-
-    @FieldDoc(
-            required = false,
-            defaultValue = "",
-            help = "The aws role session name to use.")
-    private String roleSessionName;
-
-    @FieldDoc(
-            required = false,
-            defaultValue = "",
-            help = "The sts endpoint to use, default to the default AWS STS endpoint")
-    private String stsEndpoint;
-
-    @FieldDoc(
-            required = false,
-            defaultValue = "",
-            help = "The sts region to use, defaults to the 'region' config or env region.")
-    private String stsRegion;
 
     @FieldDoc(
             required = true,
             defaultValue = "",
-            help = "The EventBridge region.")
+            sensitive = true,
+            help = "The EventBridge access key ID: "
+                    + "https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html")
+    private String accessKeyId;
+
+    @FieldDoc(
+            required = true,
+            defaultValue = "",
+            sensitive = true,
+            help = "The EventBridge secret access key: "
+                    + "https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html")
+    private String secretAccessKey;
+
+    @FieldDoc(
+            required = true,
+            defaultValue = "",
+            help = "The region where AWS EventBridge service is located. All AWS region: "
+                    + "https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/regions/Region.html")
     private String region;
 
     @FieldDoc(
@@ -103,17 +83,44 @@ public class EventBridgeConfig implements Serializable {
             help = "The EventBus name.")
     private String eventBusName;
 
+    // STS auth config.
     @FieldDoc(
             required = false,
             defaultValue = "",
-            help = "The EventBus Aws resource name(ARN).")
+            help = "The aws sts roleArn. Example: arn:aws:iam::598203581484:role/test-role")
+    private String role;
+
+    @FieldDoc(
+            required = false,
+            defaultValue = "",
+            help = "The aws sts role session name. Name it yourself.")
+    private String roleSessionName;
+
+    @FieldDoc(
+            required = false,
+            defaultValue = "",
+            help = "The AWS STS endpoint. By default, the default STS endpoint: https://sts.amazonaws.com is "
+                    + "used. See: https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html for more details.")
+    private String stsEndpoint;
+
+    @FieldDoc(
+            required = false,
+            defaultValue = "",
+            help = "The aws sts region, defaults to the 'region' config or env region.")
+    private String stsRegion;
+
+    @FieldDoc(
+            required = false,
+            defaultValue = "",
+            help = "The EventBus Aws resource name(ARN). "
+                    + "Example: arn:aws:events:ap-northeast-1:598263551484:event-bus/my_eventbus ")
     private String eventBusResourceName;
 
     @FieldDoc(required = false,
             defaultValue = "event_time,message_id",
             help = "The metadata field will add to the event. separate multiple fields with commas."
-                    + "optional: schema_version| partition | event_time | publish_time"
-                    + "message_id | sequence_id | producer_name | key | properties")
+                    + "optional: schema_version, partition, event_time, publish_time"
+                    + "message_id, sequence_id, producer_name, key, properties")
     private String metaDataField;
 
     @FieldDoc(required = false,
