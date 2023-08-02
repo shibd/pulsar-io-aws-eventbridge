@@ -12,12 +12,12 @@ data to Amazon EventBridge.
 
 ### Prerequisites
 
-Prerequisites for an AWS EventBridge sink connector connecting to external systems:
+The prerequisites for connecting an AWS EventBridge sink connector to external systems include:
 
 1. Create EventBridge and EventBus in AWS.
-2. Create the [AWS User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) and create `Access Key`(Please record `accessKey` and `secretAccessKey`).
-3. Set permissions to users, ensure that the user has the following permissions to the AWS EventBus. For details, see [permissions for event buses](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-perms.html)
-
+2. Create the [AWS User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) and create `AccessKey`(Please record `AccessKey` and `AecretAccessKey`).
+3. Assign permissions to Pulsar users, and ensure they have the following permissions to the AWS EventBus. For details, see [permissions for event buses](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-perms.html)
+ 
 ```json
   {
     "Version": "2012-10-17",
@@ -55,7 +55,7 @@ Prerequisites for an AWS EventBridge sink connector connecting to external syste
 ```
 - You can set permissions directly for this user. With this method, when you create a connector, you only need to configure `accessKey` and `secretAccessKey`.
 - Or you can use [Security Token Service](https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html), this [video](https://www.youtube.com/watch?v=dqF4VJCska4) explains how to use STS on AWS.
-  With this method, when you create a connector, in addition to configure `accessKey` and `secretAccessKey`, you also need to configure `role` and `roleSessionName`.
+  With this method, when you create a connector, in addition to configuring `accessKey` and `secretAccessKey`, you also need to configure `role` and `roleSessionName`.
 
 4. Create a [Rule](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-rule.html) in EventBridge.
 - The data structure sent to Event Bridge is described [here](## Metadata mapping), and you can create **event pattern** based on this structure.
