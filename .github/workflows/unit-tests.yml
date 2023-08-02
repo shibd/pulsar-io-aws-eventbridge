@@ -3,10 +3,10 @@ name: pulsar-io-aws-eventbridge unit tests
 on:
   pull_request:
     branches:
-      - main
+      - master
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
