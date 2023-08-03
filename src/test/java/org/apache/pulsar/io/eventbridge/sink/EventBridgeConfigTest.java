@@ -43,6 +43,8 @@ public class EventBridgeConfigTest {
     @Test
     public void testLoadSuccess() {
         Map<String, Object> configMap = new HashMap<>();
+        configMap.put("accessKeyId", "test_access_key_id");
+        configMap.put("secretAccessKey", "test_secret_access_key");
         configMap.put("eventBusName", "testEventBusName");
         configMap.put("batchMaxSize", 10);
         configMap.put("region", "test-region");
@@ -66,6 +68,8 @@ public class EventBridgeConfigTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testLoadVerifyFailedBatchMaxSizeGreaterPendingQueueSize() {
         Map<String, Object> configMap = new HashMap<>();
+        configMap.put("accessKeyId", "test_access_key_id");
+        configMap.put("secretAccessKey", "test_secret_access_key");
         configMap.put("eventBusName", "testEventBusName");
         configMap.put("region", "test-region");
         configMap.put("eventBusResourceName", "test-arn");
@@ -77,6 +81,8 @@ public class EventBridgeConfigTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testLoadVerifyFailedBatchMaxSizeInvalid() {
         Map<String, Object> configMap = new HashMap<>();
+        configMap.put("accessKeyId", "test_access_key_id");
+        configMap.put("secretAccessKey", "test_secret_access_key");
         configMap.put("eventBusName", "testEventBusName");
         configMap.put("region", "test-region");
         configMap.put("eventBusResourceName", "test-arn");
@@ -87,6 +93,8 @@ public class EventBridgeConfigTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testLoadVerifyFailedBatchMaxBytesSizeInvalid() {
         Map<String, Object> configMap = new HashMap<>();
+        configMap.put("accessKeyId", "test_access_key_id");
+        configMap.put("secretAccessKey", "test_secret_access_key");
         configMap.put("eventBusName", "testEventBusName");
         configMap.put("region", "test-region");
         configMap.put("eventBusResourceName", "test-arn");
@@ -97,6 +105,8 @@ public class EventBridgeConfigTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testLoadVerifyFailedRetryCountInvalid() {
         Map<String, Object> configMap = new HashMap<>();
+        configMap.put("accessKeyId", "test_access_key_id");
+        configMap.put("secretAccessKey", "test_secret_access_key");
         configMap.put("eventBusName", "testEventBusName");
         configMap.put("region", "test-region");
         configMap.put("eventBusResourceName", "test-arn");
@@ -106,6 +116,8 @@ public class EventBridgeConfigTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testLoadVerifyFailedIntervalRetryTimeMsInvalid() {
         Map<String, Object> configMap = new HashMap<>();
+        configMap.put("accessKeyId", "test_access_key_id");
+        configMap.put("secretAccessKey", "test_secret_access_key");
         configMap.put("eventBusName", "testEventBusName");
         configMap.put("region", "test-region");
         configMap.put("eventBusResourceName", "test-arn");
