@@ -1,5 +1,6 @@
 ---
 dockerfile: "https://hub.docker.com/r/streamnative/pulsar-io-aws-eventbridge"
+download: "https://github.com/streamnative/pulsar-io-aws-eventbridge/releases"
 alias: AWS EventBridge Sink Connector
 ---
 
@@ -15,8 +16,8 @@ data to Amazon EventBridge.
 The prerequisites for connecting an AWS EventBridge sink connector to external systems include:
 
 1. Create EventBridge and EventBus in AWS.
-2. Create the [AWS User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) and create `AccessKey`(Please record `AccessKey` and `AecretAccessKey`).
-3. Assign permissions to Pulsar users, and ensure they have the following permissions to the AWS EventBus. For details, see [permissions for event buses](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-perms.html)
+2. Create the [AWS User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) and create `AccessKey`(Please record `AccessKey` and `SecretAccessKey`).
+3. Assign permissions to AWS User, and ensure they have the following permissions to the AWS EventBus. For details, see [permissions for event buses](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-perms.html)
  
 ```json
   {
