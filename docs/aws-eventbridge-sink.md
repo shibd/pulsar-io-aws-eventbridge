@@ -89,7 +89,10 @@ No matter how you create an AWS EventBridge sink connector, the minimum configur
 > * If you want to configure more parameters, see [Configuration Properties](#configuration-properties) for reference.
 
 ### 2. Send messages to the topic
-> **Note:** If your connector is created on StreamNative Cloud, you need to authenticate your clients. See [Build applications using Pulsar clients](https://docs.streamnative.io/docs/qs-connect#jumpstart-for-beginners) for more information.
+
+{% callout title="Note" type="note" %}
+If your connector is created on StreamNative Cloud, you need to authenticate your clients. See [Build applications using Pulsar clients](https://docs.streamnative.io/docs/qs-connect#jumpstart-for-beginners) for more information.
+{% /callout %}
  
 ``` java
         PulsarClient client = PulsarClient.builder()
@@ -164,9 +167,9 @@ descriptions.
 
 The AWS EventBridge sink connector provides two delivery guarantees: **at-most-once** and **at-least-once**.
 
-> **Note:**
-> Currently, the **effectively-once** delivery guarantee is not supported, because Amazon EventBridge cannot offer the
-> support of the Sink downstream system.
+{% callout title="Note" type="note" %}
+Currently, the **effectively-once** delivery guarantee is not supported, because Amazon EventBridge cannot offer the support of the Sink downstream system.
+{% /callout %}
 
 ### Data convert
 
