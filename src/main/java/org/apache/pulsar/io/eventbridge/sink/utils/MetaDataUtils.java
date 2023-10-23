@@ -43,8 +43,8 @@ public abstract class MetaDataUtils {
         metaDataConvert.put("publish_time", (record, ctx) -> record.getMessage().map(Message::getPublishTime));
         metaDataConvert.put("message_id",
                 (record, ctx) -> record.getMessage().map(msg -> msg.getMessageId().toString()));
-        metaDataConvert.put("sequence_id", (record, ctx) -> record.getMessage().map(Message::getProducerName));
-        metaDataConvert.put("producer_name", (record, ctx) -> record.getMessage().map(Message::getSchemaVersion));
+        metaDataConvert.put("sequence_id", (record, ctx) -> record.getMessage().map(Message::getSequenceId));
+        metaDataConvert.put("producer_name", (record, ctx) -> record.getMessage().map(Message::getProducerName));
         metaDataConvert.put("properties", (record, ctx) -> Optional.of(record.getProperties()));
         metaDataConvert.put("key", (record, ctx) -> record.getKey().map(String::toString));
     }

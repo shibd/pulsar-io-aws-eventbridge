@@ -49,6 +49,10 @@ public abstract class RecordConvertTest {
         Mockito.when(mockMessageId.toString()).thenReturn("1:1:123");
         Message mockMessage = Mockito.mock(Message.class);
         Mockito.when(mockMessage.getMessageId()).thenReturn(mockMessageId);
+        String producerName = "my-producer";
+        long sequenceId = 1L;
+        Mockito.when(mockMessage.getProducerName()).thenReturn(producerName);
+        Mockito.when(mockMessage.getSequenceId()).thenReturn(sequenceId);
         long mockEventTime = System.currentTimeMillis();
         Pair<Schema<GenericRecord>, GenericRecord> recordAndSchema = getRecordAndSchema();
         Record<? extends GenericObject> record = new Record<GenericRecord>() {
@@ -76,6 +80,8 @@ public abstract class RecordConvertTest {
         HashSet<String> metaDataFields = new HashSet<>();
         metaDataFields.add("event_time");
         metaDataFields.add("message_id");
+        metaDataFields.add("sequence_id");
+        metaDataFields.add("producer_name");
         DefaultRecordConvert recordConvert = new DefaultRecordConvert(metaDataFields);
         try {
             String jsonString = recordConvert.convertToJson((Record<GenericObject>) record);
@@ -88,6 +94,8 @@ public abstract class RecordConvertTest {
             Assert.assertEquals(mockEventTime, jsonNode.get("event_time").asLong());
             Assert.assertEquals(mockMessageId.toString(), jsonNode.get("message_id").asText());
             Assert.assertNull(jsonNode.get("partition"));
+            Assert.assertEquals(sequenceId, jsonNode.get("sequence_id").asLong());
+            Assert.assertEquals(producerName, jsonNode.get("producer_name").asText());
         } catch (Exception e) {
             Assert.fail(e.getMessage());
         }
