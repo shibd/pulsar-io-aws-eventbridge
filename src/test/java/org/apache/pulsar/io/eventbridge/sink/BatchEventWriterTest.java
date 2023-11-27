@@ -103,7 +103,6 @@ public class BatchEventWriterTest {
             List<PutEventsResultEntry> resultEntryList = new ArrayList<>();
             for (PutEventsRequestEntry entry : putEventsRequest.entries()) {
                 Assert.assertEquals(eventBridgeConfig.getEventBusName(), entry.eventBusName());
-                Assert.assertEquals(eventBridgeConfig.getEventBusResourceName(), entry.resources().get(0));
                 Assert.assertEquals(data, entry.detail());
                 Assert.assertEquals(sinkName, entry.source());
                 Assert.assertEquals(topicName, entry.detailType());
@@ -131,7 +130,7 @@ public class BatchEventWriterTest {
                 // Testing when a single message is greater than batchMaxByteSize also triggers a refresh
                 {-1, 50, -1, 10},
                 {10, EventBridgeConfig.DEFAULT_MAX_BATCH_BYTES_SIZE, -1, 1},
-                {-1, 650, 500, 2},
+                {-1, 600, 500, 2},
                 {-1, EventBridgeConfig.DEFAULT_MAX_BATCH_BYTES_SIZE, 500, 1},
         };
     }

@@ -17,17 +17,13 @@ The prerequisites for connecting an AWS EventBridge sink connector to external s
 
 1. Create EventBridge and EventBus in AWS.
 2. Create the [AWS User](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) and create `AccessKey`(Please record `AccessKey` and `SecretAccessKey`).
-3. Assign permissions to AWS User, and ensure they have the following permissions to the AWS EventBus. For details, see [permissions for event buses](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-perms.html)
- 
+3. Assign permissions to AWS User, and ensure they have the `PutEvents` permissions to the AWS EventBus. For details, see [permissions for event buses](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-perms.html)
+
 ```json
   {
     "Version": "2012-10-17",
     "Statement": [
-
-      ### To grant permissions for an account to use the PutEvents action, include the following, otherwise delete this section: ###
-
       {
-
         "Sid": "AllowAccountToPutEvents",
         "Effect": "Allow",
         "Principal": {
@@ -35,25 +31,10 @@ The prerequisites for connecting an AWS EventBridge sink connector to external s
         },
         "Action": "events:PutEvents",
         "Resource": "{EventBusArn}"
-      },
-
-      ### Include the following section to grant permissions to all members of your AWS Organizations to use the PutEvents action ###
-
-      {
-        "Sid": "AllowAllAccountsFromOrganizationToPutEvents",
-        "Effect": "Allow",
-        "Principal": "*",
-        "Action": "events:PutEvents",
-        "Resource": "{EventBusArn}"
-        "Condition": {
-          "StringEquals": {
-            "aws:PrincipalOrgID": "o-yourOrgID"
-          }
-        }
       }
     ]
 }
-```
+````
 - You can set permissions directly for this user. With this method, when you create a connector, you only need to configure `accessKey` and `secretAccessKey`.
 - Or you can use [Security Token Service](https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html), this [video](https://www.youtube.com/watch?v=dqF4VJCska4) explains how to use STS on AWS.
   With this method, when you create a connector, in addition to configuring `accessKey` and `secretAccessKey`, you also need to configure `role` and `roleSessionName`.
@@ -142,8 +123,8 @@ descriptions.
 
 | Name                    | Type   | Required | Default           | Description                                                                                                                                                                                                                              |
 |-------------------------|--------|----------|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `accessKeyId`           | String | yes      | "" (empty string) | The AWS EventBridge [access key ID.](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html)                                                                                                              |
-| `secretAccessKey`       | String | yes      | "" (empty string) | The AWS EventBridge [secret access key.](https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html)                                                                                                          |
+| `accessKeyId`           | String | yes      | "" (empty string) | The AWS EventBridge [access key ID.](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)                                                                                                                   |
+| `secretAccessKey`       | String | yes      | "" (empty string) | The AWS EventBridge [secret access key.](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)                                                                                                               |
 | `region`                | String | yes      | "" (empty string) | The region where AWS EventBridge service is located. [All AWS region](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/regions/Region.html)                                                                              |
 | `eventBusName`          | String | yes      | "" (empty string) | The Event Bus name.                                                                                                                                                                                                                      |
 | `role`                  | String | false    | "" (empty string) | The AWS STS [roleArn](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html). Example: arn:aws:iam::598203581484:role/test-role                                                                                        |
@@ -153,7 +134,7 @@ descriptions.
 | `eventBusResourceName`  | String | no       | "" (empty string) | The Event Bus ARN (AWS Resource Name). Example: `arn:aws:events:ap-northeast-1:598263551484:event-bus/my_eventbus`                                                                                                                       |
 | `metaDataField`         | String | no       | "" (empty string) | The metadata fields added to the event. Multiple fields are separated with commas. Optional values: `schema_version`, `partition`,  `event_time`, `publish_time`, `message_id`, `sequence_id`, `producer_name`, `key`, and `properties`. |
 | `batchPendingQueueSize` | int    | no       | 1000              | Pending queue size. This value must be greater than `batchMaxSize`.                                                                                                                                                                      |
-| `batchMaxSize`          | int    | no       | 10                | Maximum number of batch messages. The number must be less than or equal to 10 (AWS required).                                                                                                                                            |
+| `batchMaxSize`          | int    | no       | 10                | Maximum number of batch messages. The number must be less than or equal to 10 (AWS EventBridge required).                                                                                                                                |
 | `batchMaxBytesSize`     | long   | no       | 640               | Maximum number of batch bytes payload size. This value cannot be greater than 512KB.                                                                                                                                                     |
 | `batchMaxTimeMs`        | long   | no       | 5000              | Batch max wait time: milliseconds.                                                                                                                                                                                                       |
 | `maxRetryCount`         | long   | no       | 100               | Maximum number of retries to send events, when put events failed.                                                                                                                                                                        |

@@ -98,7 +98,6 @@ public class BatchEventWriter implements Closeable {
                 .source(sinkName)
                 .detail(jsonString)
                 .detailType(record.getTopicName().get())
-                .resources(eventBridgeConfig.getEventBusResourceName())
                 .time(Instant.now())
                 .build();
 
@@ -206,6 +205,8 @@ public class BatchEventWriter implements Closeable {
                     final PendingFlushRequest pendingFlushRequest = pendingFlushRequestList.get(i);
                     final PutEventsResultEntry putEventsResultEntry = putEventsResultEntryList.get(i);
                     if (putEventsResultEntry.errorCode() != null) {
+                        log.error("Failed to send event to AWS EventBridge, errorCode: {}, errorMessage: {}",
+                                putEventsResultEntry.errorCode(), putEventsResultEntry.errorMessage());
                         failedFlushRequestList.add(pendingFlushRequest);
                     } else {
                         // ack success msg.
