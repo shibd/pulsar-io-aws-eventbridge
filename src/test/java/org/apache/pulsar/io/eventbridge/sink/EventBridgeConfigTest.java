@@ -53,7 +53,6 @@ public class EventBridgeConfigTest {
         Assert.assertEquals("testEventBusName", eventBridgeConfig.getEventBusName());
         Assert.assertEquals(10, eventBridgeConfig.getBatchMaxSize());
         Assert.assertEquals("test-region", eventBridgeConfig.getRegion());
-        Assert.assertEquals("test-arn", eventBridgeConfig.getEventBusResourceName());
         // assert set default value.
         Assert.assertEquals(1000, eventBridgeConfig.getBatchPendingQueueSize());
         Assert.assertEquals(640, eventBridgeConfig.getBatchMaxBytesSize());

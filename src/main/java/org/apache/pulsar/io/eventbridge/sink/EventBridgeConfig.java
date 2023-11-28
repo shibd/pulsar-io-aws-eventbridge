@@ -59,7 +59,7 @@ public class EventBridgeConfig implements Serializable {
             defaultValue = "",
             sensitive = true,
             help = "The EventBridge access key ID: "
-                    + "https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html")
+                    + "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html")
     private String accessKeyId;
 
     @FieldDoc(
@@ -67,7 +67,7 @@ public class EventBridgeConfig implements Serializable {
             defaultValue = "",
             sensitive = true,
             help = "The EventBridge secret access key: "
-                    + "https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html")
+                    + "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html")
     private String secretAccessKey;
 
     @FieldDoc(
@@ -114,6 +114,7 @@ public class EventBridgeConfig implements Serializable {
             defaultValue = "",
             help = "The EventBus Aws resource name(ARN). "
                     + "Example: arn:aws:events:ap-northeast-1:598263551484:event-bus/my_eventbus ")
+    @Deprecated(since = "Use eventBusName instead")
     private String eventBusResourceName;
 
     @FieldDoc(required = false,
@@ -130,7 +131,8 @@ public class EventBridgeConfig implements Serializable {
 
     @FieldDoc(required = false,
             defaultValue = "10",
-            help = "MMaximum number of batch messages. The number must be less than or equal to 10 (AWS Required).")
+            help = "Maximum number of batch messages. "
+                    + "The number must be less than or equal to 10 (AWS EventBridge Required).")
     private int batchMaxSize;
 
     @FieldDoc(required = false,
