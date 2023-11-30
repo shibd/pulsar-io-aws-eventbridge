@@ -37,13 +37,11 @@ on:
 
 jobs:
   labeling:
-    if: ${{ github.repository == 'streamnative/pulsar-io-template' }}
+    if: ${{ github.repository == 'streamnative/pulsar-io-aws-eventbridge' }}
     permissions:
       pull-requests: write 
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
       - uses: streamnative/github-workflow-libraries/doc-label-check@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
